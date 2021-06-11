@@ -5,7 +5,7 @@ This is a simple mouse accuracy minigame created entirely in HTML.
 Everyone is on the computer a lot, especially nowadays. I personally suffer from pretty poor mouse accuracy even in daily use computing
 So I made this little game based on [Photon](https://github.com/pmueller/photon) by pmueller to hopefully improve that.
 
-![Game preview](preview.gif)
+![Game preview](data/preview.gif)
 
 ## Instructions
 - You are the square in the center. Your job is to click on squares as they appear.

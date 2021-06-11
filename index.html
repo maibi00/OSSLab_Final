@@ -4,7 +4,7 @@
     <title>Mouse Accuracy Trainer</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-	body{ background:url(bg.jpg) no-repeat center center fixed; background-size: cover; }
+	body{ background:url(data/bg.jpg) no-repeat center center fixed; background-size: cover; }
       #game {
         border: 1px solid #CCC;
         background-color: #333;
@@ -168,11 +168,11 @@
       var highscores = [];
 
     	function playSound1() {
-        var a = new Audio('success.mp3');
+        var a = new Audio('data/success.mp3');
         a.play();
       }
       function playSound2() {
-          var b = new Audio('error.mp3');
+          var b = new Audio('data/error.mp3');
           b.play();
       }
 
