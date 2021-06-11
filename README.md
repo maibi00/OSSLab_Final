@@ -38,5 +38,7 @@ or if you'd rather play it locally,
 	* SFX for successfully clicking and missing squares
 	* Change in UI appearance and size of gameplay area
 	* Bugfixes to logic as detailed in changelog.txt
+
+Click [here](https://youtu.be/TifnsOSf288) for presentation video
 	
 For further assistance, please contact 21800827@handong.edu
