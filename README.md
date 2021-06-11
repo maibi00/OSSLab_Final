@@ -5,6 +5,8 @@ This is a simple mouse accuracy minigame created entirely in HTML.
 Everyone is on the computer a lot, especially nowadays. I personally suffer from pretty poor mouse accuracy even in daily use computing
 So I made this little game to hopefully improve that.
 
+![Game preview](preview.gif)
+
 ## Instructions
 - You are the square in the center. Your job is to click on squares as they appear.
 - Your click only counts if:
@@ -14,6 +16,10 @@ So I made this little game to hopefully improve that.
 - You have 60 seconds to click as many squares as you can. Good luck!
 
 ## To play
+- Head to https://maibi00.github.io/OSSLab_Final 
+
+or if you'd rather play it locally,
+
 1. Clone the repo
 2. Launch index.html in your browser of choice.
 3. That's it!
