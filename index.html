@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mouse Accuracy Trainer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+	body{ background:url(bg.jpg) no-repeat center center fixed; background-size: cover; }
+      #game {
+        border: 1px solid #CCC;
+        background-color: #333;
+      }
+      
+      .color.red     { background-color: #ff0808; }
+      .color.yellow  { background-color: #fff105; }
+      .color.teal    { background-color: #47fcad; }
+      .color.purple  { background-color: #7a41f5; }
+      .flash {
+        max-width: 463px;
+        padding: 10px 20px;
+        color: #721c24;
+        background-color: #f8d7da;
+      }
+      .only-mobile {
+        display: none;
+      }
+      @media (max-width: 500px) {
+        .only-mobile {
+          display: block;
+        }
+      }
+	
+
+
+.center {
+  margin: auto;
+  width: 600px;
+  padding:0px;
+}
+.monitor {
+  width:600px;
+  height: 300px;
+  overflow:hidden;
+  border: solid 1em #333;
+  border-radius:.5em;
+}
+.monitor::-webkit-scrollbar {
+      width: 5px;
+}
+.monitor::-webkit-scrollbar-thumb {
+  background: #666;
+}
+::-webkit-scrollbar-track {
+      background-color: #888;
+}
+.stand:before {
+  content:"";
+  display:block;
+  position:relative;
+  background: #222;
+  width: 150px;
+  height: 20px;
+  top:352px;
+  left:245px;
+}
+.stand:after {
+   content:"";
+   display:block;
+   position:relative;
+   background:#333;
+   border-top-left-radius:.5em;
+   border-top-right-radius:.5em;
+   width: 300px;
+   height: 15px;
+   top: 20px;
+   left: 170px;
+}
+#legend {
+		  position:relative;
+   background:#333;
+   top: 10px;
+   left: 45px;
+        width: 500px;
+        padding: 20px;
+        margin-top: 10px;
+        color: #fafafa;
+        text-align: center;
+      }
+      #legend > div {
+        display: inline;
+        padding: 0 15px;
+      }
+      #legend .color {
+        width: 10px;
+        height: 10px;
+        display: inline-block;
+        margin-left: 2px;
+      }
+.startButton{ background-color:#FC3; color:#000; border:none; cursor:pointer;  padding:5px 10px 5px 10px; border-radius:50%;}
+.startButton:hover{ background-color:#a8eb80;}
+.restartButton{ background-color:#a8eb80; color:#000; border:none; cursor:pointer;  padding:5px 10px 5px 10px; border-radius:50%;}
+.restartButton:hover{ background-color:#FC3;} 
+
+#instructions {
+	position:relative;
+	top: 0px;
+	left: 50px;
+        width: 500px;
+        padding: 0px;
+        margin-top: 10px;
+        color: #333333;
+        text-align: left;
+		font-size:12px;
+      }
+	   #instructions h3{ margin:0px;}
+	 #instructions p{ margin:0px;}
+    </style>
+  </head>
+  <body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
+   <div class="center"> 
+    <div class="stand">
+        <div class="monitor">
+             <canvas id="game" width="598px" height="298px">
+        </canvas>
+            
+        </div>
+    </div>
+<section id="legend">
+     <div style="start"><button  class="startButton" onClick="startGame()">&nbsp;</button>&nbsp;<text id='start_text'>Start Game<text></div>
+<!--      <div><button  class="restartButton" onClick="window.location='index.html'">&nbsp;</button>&nbsp;re-Start</div>
+     <div><button  class="restartButton" onClick="window.location='index.html'">&nbsp;</button>&nbsp;re-Start</div> -->
+      <div>q <div class='color red'></div></div>
+      <div>w <div class='color yellow'></div></div>
+      <div>e <div class='color teal'></div></div>
+      <div>r <div class='color purple'></div></div>
+    </section>
+<section id="instructions"><br>
+     <h3> Mouse Accuracy Trainer</h3>
+     <p>Your job is to click on the squares as they appear, and also make sure that the color matches the square in the middle.</p>
+    <p>Use the Q, W, E and R key to change the color of the square according to the legend above.</p>
+    <p>You have 60 seconds to click as many squares as you can, good luck!</p>
+    </section>
+    </div>
+
+<!--     <div id="highscore_data" style="display: none">
+    </div>
+ -->
+    <script>
+      // WE NEED A WAY TO PREVENT THE PLAYER FROM PLAYING 2 GAME SIMULTANEOUSLY
+      // when playing is true, it locks the "Start game" button
+      var playing = false;
+
+      // WE NEED AN ARRAY TO STORE THE HIGHSCORE
+      var highscores = [];
+
+    	function playSound1() {
+        var a = new Audio('success.mp3');
+        a.play();
+      }
+      function playSound2() {
+          var b = new Audio('error.mp3');
+          b.play();
+      }
+
+    	function startGame(){
+        if (playing == false) {
+          playing = true;
+          document.getElementById("start_text").innerHTML = "<strike>Play Again</strike>";
+
+      		document.getElementById("game").style.backgroundColor='#333';
+            var canvas = document.getElementById("game");
+
+            // Clear the canvas everytim a new game starts
+            canvas.width = canvas.width
+
+            var ctx = canvas.getContext("2d");
+            ctx.clearRect(0, 0, ctx.width, ctx.height);
+
+            var colors = [
+              "#ff0808", // red
+              "#fff105", // yellow
+              "#47fcad", // teal
+              "#864fff" // purple
+            ];
+
+            var currentColor = colors[Math.floor(Math.random() * colors.length)];
+
+            var setPhotonColor = function() {
+              //Outline on the central box so that the user can differentiate the boxes
+              ctx.fillStyle = "#fff";
+              ctx.fillRect(295, 155, 12, 12);
+
+              ctx.fillStyle = currentColor;
+              ctx.fillRect(296, 156, 10, 10);
+            };
+
+            setPhotonColor();
+
+            var photonRandomColor = function() {
+              currentColor =  colors[Math.floor(Math.random() * colors.length)];
+              setPhotonColor();
+            };
+
+            var photonToColor = function(idx) {
+              currentColor = colors[idx];
+              setPhotonColor();
+            };
+
+            document.onkeypress = function(e) {
+              if (gameover) { return; }
+              e = e || window.event;
+
+              if (e.keyCode == 113) {
+                // q
+                photonToColor(0);
+              } else if (e.keyCode == 119) {
+                // w
+                photonToColor(1);
+              } else if (e.keyCode == 101) {
+                // e
+                photonToColor(2);
+              } else if (e.keyCode == 114) {
+                // r
+                photonToColor(3);
+              }
+            };
+
+            function relMouseCoords(event) {
+              var totalOffsetX = 0;
+              var totalOffsetY = 0;
+              var canvasX = 0;
+              var canvasY = 0;
+              var currentElement = this;
+
+              do {
+                  totalOffsetX += currentElement.offsetLeft - currentElement.scrollLeft;
+                  totalOffsetY += currentElement.offsetTop - currentElement.scrollTop;
+      			
+              } while (currentElement == currentElement.offsetParent);
+
+              canvasX = event.pageX - totalOffsetX;
+              canvasY = event.pageY - totalOffsetY;
+
+              return {x: canvasX, y: canvasY}
+            };
+            HTMLCanvasElement.prototype.relMouseCoords = relMouseCoords;
+
+            var drawPixel = function(x, y, color) {
+              ctx.fillStyle = color;
+              ctx.fillRect(x - 2, y - 2, 5, 5);
+      		
+            };
+
+            var bugs = [];
+            var squashedBugs = [];
+            var score = 0;
+
+            var timeLeft = 60;
+            var gameover = false;
+
+            var drawBug = function(bug) {
+              var x = bug[0];
+              var y = bug[1];
+              var color = bug[2];
+
+              ctx.fillStyle = color;
+              ctx.fillRect(x, y, 10, 10);
+            };
+
+            var drawBugs = function() {
+              var i;
+              for(i = 0; i < bugs.length; i++) {
+                drawBug(bugs[i]);
+              }
+            };
+
+            var drawScore = function() {
+              ctx.fillStyle = "#fff";
+              ctx.font = "14px serif";
+              var toDraw = "Score: " + score;
+              var txt = ctx.measureText(toDraw);
+              ctx.clearRect(0, 0, txt.width + 13, 16);
+              ctx.fillText(toDraw, 5, 13);
+            };
+            drawScore();
+
+            var drawTimeLeft = function() {
+              ctx.fillStyle = "#fff";
+              ctx.font = "14px serif";
+              var toDraw = "Time: " + timeLeft;
+              var txt = ctx.measureText(toDraw);
+              ctx.clearRect(535, 0, txt.width + 13, 16);
+              ctx.fillText(toDraw, 535, 13);
+            };
+            drawTimeLeft();
+
+            var redraw = function() {
+              if (gameover) { return; }
+              setPhotonColor();
+              drawBugs();
+              drawScore();
+              drawTimeLeft();
+            };
+
+            var emitPhotonTo = function(x, y, color) {
+              ctx.beginPath();
+              ctx.moveTo(300, 161);
+              ctx.lineTo(x, y);
+              ctx.strokeStyle = color;
+              ctx.stroke();
+              ctx.closePath();
+
+              setTimeout(function() {
+                if (gameover) { return; }
+
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+      		  
+                redraw();
+              }, 150);
+            };
+
+            var bugWasClicked = function(clickX, clickY, bugX, bugY, photonColor, bugColor) {
+              var rect = {x: bugX, y: bugY, w: 10, h: 10};
+              var mx = clickX;
+              var my = clickY;
+      		
+              if (mx >= rect.x && mx <= rect.x + rect.w
+                && my >= rect.y && my <= rect.y + rect.h
+                && photonColor === bugColor) {
+      			 
+                  return true;
+      			
+              } else {
+      		
+                return false;
+              }
+            };
+
+            var squashBugs = function(x, y, color) {
+              var i = bugs.length;
+              // if success is true after the while loop ends, it means that the user clicked accurately
+              // if success is false after the while loop has ended, it means that a failed click happened (Play the error sfx)
+      		    var success = false;
+              while (i--) {
+                if (bugWasClicked(x, y, bugs[i][0], bugs[i][1], color, bugs[i][2])) {
+                  success = true;
+                  var squashed = bugs.splice(i, 1)[0];
+                  playSound1();
+                  squashedBugs.push(squashed);
+                  score++;
+
+                  // Every time a box is clicked, a new one appears independent of the regular spawning
+                  // but limit it to only work when there's less than 10 on screen at a time (so the screen does not overflow with squares)
+                  if (bugs.length < 10) {
+                    addBug();
+                  }
+
+                  redraw();
+                }
+              };
+              if (success == false) {
+                playSound2();
+              }
+            };
+
+            canvas.onclick = function(e) {
+              if (gameover) { return; }
+      		
+              var coords = canvas.relMouseCoords(e);
+              emitPhotonTo(coords.x, coords.y, currentColor);
+              squashBugs(coords.x, coords.y, currentColor);
+            };
+
+            var addBug = function() {
+      		  
+              var color = colors[Math.floor(Math.random() * colors.length)];
+
+              // There was a bug here where the max-height goes waaaay beyond the monitor limit (501px even though the max height is 298px)
+              // so half of the bugs are displayed way below the screen (hidden out of view)
+              bugs.push([Math.floor(Math.random() * 501), Math.floor(Math.random() * 298), color]);
+            };
+
+            var drawGameover = function() {
+              ctx.clearRect(0, 0, canvas.width, canvas.height);
+              // display all the successful lines
+              for(var i = 0; i < squashedBugs.length; i++) {
+                emitPhotonTo(squashedBugs[i][0], squashedBugs[i][1], squashedBugs[i][2]);
+              }
+
+              // show score
+              ctx.fillStyle = "#fff";
+              ctx.font = "30px serif";
+              ctx.textAlign = "center";
+
+
+              var toDraw = "Game Over! Your score is " + score;
+              // var toDraw = "Game Over! Your score is " + score; +"\nHighscores\n" + highscore_string;
+              ctx.fillText(toDraw, 300, 100);
+
+              ctx.font = "20px serif";
+              ctx.textAlign = "left";
+              var highscore_string = '';
+              var y_offset = 20;
+
+              var toDraw = "SCORE     :    TIME";
+              ctx.fillText(toDraw, 150, 120);
+
+              highscores.forEach(function(entry) {
+                var toDraw = entry[0].toString() + "              :    " + entry[1];
+                ctx.fillText(toDraw, 150, 120 + y_offset);
+                y_offset += 20;
+              });
+              
+              playing = false;
+              document.getElementById("start_text").innerHTML = "Play Again";
+            };
+
+            var storeHighScore = function() {
+              // Store current score into our global array
+              // We will draw the highscore along the game over screen
+              var d = new Date(); // get current time and format it to your liking in the line below
+              current_time = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds() + " / " +d.getDate() + "-" +d.getMonth() + "-"+ d.getFullYear();
+              
+              // store the score as well as the time the score was achieved in the highscore array 
+              highscores.push([parseInt(score), current_time]);
+
+              // sort the highscore based on index zero of the array (the actual score)
+              // index one of the array contains the time, as shown in the line above
+
+              highscores.sort((a, b) => b[0] - a[0]);
+
+              // grab only the top 5 highscores
+              if (highscores.length > 5){
+                highscores = highscores.splice(0, 5);
+              }
+
+            };
+
+            var tick = false;
+
+            var gameLoop = setInterval(function() {
+              tick = !tick
+              if (tick) {
+                timeLeft--;
+              }
+
+              if (timeLeft <= 0) {
+                gameover = true;
+                storeHighScore(score);
+                drawGameover();
+                clearInterval(gameLoop);
+                return;
+              }
+
+              if (tick || score >= 30) {
+                addBug();
+                redraw();
+              }
+            }, 500);
+        }
+
+    	}
+    </script>
+  </body>
+</html>

@@ -1,0 +1,6 @@
+Added (client side) Highscore tracking.
+Added Restart capabilties and proper "Start" handling (player can no longer start more than one game at the same time).
+Fixed issue with Error SFX  not playing, now it plays whenever you click on an incorrect color or empty space.
+Fixed issue with bugs not being spawned as frequent, this was caused because the spawn are goes beyond the height of the screen.
+Adjusted the Error.mp3 file so there is no 500ms delay at the start.
+Changed instruction prompt
