@@ -3,7 +3,7 @@
 ## What is the purpose of this project?
 This is a simple mouse accuracy minigame created entirely in HTML.
 Everyone is on the computer a lot, especially nowadays. I personally suffer from pretty poor mouse accuracy even in daily use computing
-So I made this little game to hopefully improve that.
+So I made this little game based on [Photon][https://github.com/pmueller/photon] by pmueller to hopefully improve that.
 
 ![Game preview](preview.gif)
 
@@ -23,3 +23,17 @@ or if you'd rather play it locally,
 1. Clone the repo
 2. Launch index.html in your browser of choice.
 3. That's it!
+
+## References
+[W3schools][https://www.w3schools.com/]
+[Photon][https://github.com/pmueller/photon]
+[MouseAccuracy][https://github.com/mbowen13/MouseAccuracy]
+
+## About
+- Added from Photon:
+	* Local highscore list
+	* Start & Restart button
+	* SFX for successfully clicking and missing squares
+	* Bugfixes to logic as detailed in changelog.txt
+	
+For further assistance, please contact 21800827@handong.edu
