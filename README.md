@@ -36,6 +36,7 @@ or if you'd rather play it locally,
 	* Local highscore list
 	* Start & Restart button
 	* SFX for successfully clicking and missing squares
+	* Change in UI appearance and size of gameplay area
 	* Bugfixes to logic as detailed in changelog.txt
 	
 For further assistance, please contact 21800827@handong.edu

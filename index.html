@@ -30,7 +30,6 @@
       }
 	
 
-
 .center {
   margin: auto;
   width: 600px;
@@ -116,6 +115,11 @@
     </style>
   </head>
   <body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
+
+<p class="flash only-mobile">
+  Are you on a mobile device? The game currently requires a mouse and keyboard, check back again on a desktop!
+</p>
+
    <div class="center"> 
     <div class="stand">
         <div class="monitor">
@@ -128,16 +132,17 @@
      <div style="start"><button  class="startButton" onClick="startGame()">&nbsp;</button>&nbsp;<text id='start_text'>Start Game<text></div>
 <!--      <div><button  class="restartButton" onClick="window.location='index.html'">&nbsp;</button>&nbsp;re-Start</div>
      <div><button  class="restartButton" onClick="window.location='index.html'">&nbsp;</button>&nbsp;re-Start</div> -->
-      <div>q <div class='color red'></div></div>
-      <div>w <div class='color yellow'></div></div>
-      <div>e <div class='color teal'></div></div>
-      <div>r <div class='color purple'></div></div>
+      <div>Q <div class='color red'></div></div>
+      <div>W <div class='color yellow'></div></div>
+      <div>E <div class='color teal'></div></div>
+      <div>R <div class='color purple'></div></div>
     </section>
 <section id="instructions"><br>
      <h3> Mouse Accuracy Trainer</h3>
      <p>You are the square in the center. Your job is to click on squares as they appear.</p>
      <p>Your click only counts if your scare matches the color of the square that is clicked, and you click within the square.</p>
-    <p>Use the Q, W, E and R key to change the color of the square according to the legend above.</p>
+     <p>A new square will spawn when one is successfully clicked in addition to the regular spawning. Expect things to get chaotic!</p>
+    <p>Use the `Q`, `W`, `E` and `R` key to change the color of the square according to the legend ingame.</p>
     <p>You have 60 seconds to click as many squares as you can, good luck!</p>
     </section>
     </div>
@@ -146,11 +151,11 @@
     </div>
  -->
     <script>
-      // WE NEED A WAY TO PREVENT THE PLAYER FROM PLAYING 2 GAME SIMULTANEOUSLY
+      // To prevent the player from starting multiple games at once
       // when playing is true, it locks the "Start game" button
       var playing = false;
 
-      // WE NEED AN ARRAY TO STORE THE HIGHSCORE
+      // Array to store the high scores
       var highscores = [];
 
     	function playSound1() {
