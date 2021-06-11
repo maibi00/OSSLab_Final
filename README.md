@@ -26,7 +26,9 @@ or if you'd rather play it locally,
 
 ## References
 [W3schools](https://www.w3schools.com/)
+
 [Photon](https://github.com/pmueller/photon)
+
 [MouseAccuracy](https://github.com/mbowen13/MouseAccuracy)
 
 ## About
