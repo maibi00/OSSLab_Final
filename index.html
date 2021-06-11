@@ -20,11 +20,17 @@
         color: #721c24;
         background-color: #f8d7da;
       }
-      .only-mobile {
+      .content-desktop{
+        display: block;
+      }
+      .content-mobile {
         display: none;
       }
-      @media (max-width: 500px) {
-        .only-mobile {
+      @media screen and (max-width: 500px) {
+        .content-desktop {
+          display: none;
+        }
+        .content-mobile {
           display: block;
         }
       }
@@ -115,8 +121,9 @@
     </style>
   </head>
   <body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
+    
 <div id="content-mobile">
-  <p class="flash only-mobile">
+  <p class="flash content-mobile">
     Are you on a mobile device? The game currently requires a mouse and keyboard, check back again on a desktop!
   </p>
 </div>
